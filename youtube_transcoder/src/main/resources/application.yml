@@ -1,0 +1,17 @@
+micronaut:
+  application:
+    name: youtube_transcoder
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+
+# for database
+datasources:
+  default:
+    driver-class-name: org.mariadb.jdbc.Driver
+    db-type: mariadb
+    jdbc-url: jdbc:mysql://mariadb:3306/citizix_db
+    username: citizix_user
+    password: An0thrS3crt

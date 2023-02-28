@@ -1,0 +1,37 @@
+micronaut:
+  application:
+    name: youtube3
+  server:
+    multipart:
+      disk: true
+      max-file-size: 4489312220
+    max-request-size: 4489312220
+
+
+datasources:
+  default:
+    driver-class-name: org.mariadb.jdbc.Driver
+    db-type: mariadb
+    jdbc-url: jdbc:mysql://mariadb:3306/citizix_db
+    username: citizix_user
+    password: An0thrS3crt
+    host: 172.18.0.3
+    schema-generate: CREATE_DROP
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+
+jpa:
+  default:
+    properties:
+      hibernate:
+      hbm2ddl:
+        auto: update
+      show_sql: true

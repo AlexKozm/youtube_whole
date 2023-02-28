@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "335ec588-d80e-4abc-a2f1-136857344053",
+		"name": "health",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24142531"
+	},
+	"item": [
+		{
+			"name": "/health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/health_check",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"health_check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/run/media/alex/DED66EADD66E861D/Torrent/Witcher/The.Witcher.S02.1080p.NF.WEB-DL.DDP5.1.Atmos.x264-EniaHD/The.Witcher.S02E08.Family.1080p.NF.WEB-DL.DDP5.1.Atmos.x264-EniaHD.mkv"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{api}}/video",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"video"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/video",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/alex/Downloads/Telegram Desktop/video_2023-02-25_23-01-06.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{api}}/video",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"video"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/videos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/videos",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/video",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/video?id=77",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"video"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "77"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/decoded_video",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/decoded_video?id=100",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"decoded_video"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/screenshots",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "api",
+			"value": "http://localhost:8080"
+		}
+	]
+}
