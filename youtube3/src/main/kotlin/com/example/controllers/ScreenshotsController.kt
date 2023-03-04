@@ -10,6 +10,10 @@ import io.micronaut.http.annotation.QueryValue
 class ScreenshotsController (
     private val screenshotsService: ScreenshotsService
 ) {
+    /*
+     * may be the best variant is:
+     * screenshots/{videoName}/{imageNumber}
+     */
     @Get("/screenshots")
     fun getScreenshot(@QueryValue id: Int, @QueryValue num: Int)
         = screenshotsService.getScreen(id, num)

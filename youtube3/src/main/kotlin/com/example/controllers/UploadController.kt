@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono
 class UploadController(
     private val uploadVideoService: UploadVideoService
 ) {
-    @Post(value = "/video", consumes = [MULTIPART_FORM_DATA])
+    //I think for more clarity it's better to rename to upload
+    @Post(value = "/upload", consumes = [MULTIPART_FORM_DATA])
     fun upload(@Part file: StreamingFileUpload): Mono<HttpResponse<String>> = uploadVideoService.uploadVideo(file)
 }
