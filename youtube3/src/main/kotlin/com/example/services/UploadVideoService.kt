@@ -25,12 +25,15 @@ import java.sql.Connection
 class UploadVideoService(
     private val rabbitMqUtil: RabbitMqUtil,
     private val originalVideoFileDAO: OriginalVideoFileDAO,
+    //why we need thin value? we don't use it
     private val transactionManager: SynchronousTransactionManager<Connection>
 
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
     private fun createFile(file: StreamingFileUpload): Pair<OriginalVideoFileEntity, File> {
+        //instead of using Google @Beta unstable function it's easily can do by kotlin :
+        //file.filename.substringBeforeLast(".")
         val entity = OriginalVideoFileEntity(Files.getNameWithoutExtension(file.filename),
             Files.getFileExtension(file.filename))
         originalVideoFileDAO.save(entity)
@@ -41,7 +44,8 @@ class UploadVideoService(
         log.info("file from video: ${file.filename}; size: ${file.size}")
         val (entity, diskFile) = createFile(file)
         val outStream = FileOutputStream(diskFile)
-
+        //I think this pattern isn't necessary in this context
+        //We need may be just use method from Files: copy()
         return Mono.create {
                 emitter ->
             file.subscribe(object : Subscriber<PartData> {

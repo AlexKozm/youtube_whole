@@ -10,4 +10,5 @@ abstract class AbstractEntity : Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
         private set
+    //may be it was useful to add creation time
 }

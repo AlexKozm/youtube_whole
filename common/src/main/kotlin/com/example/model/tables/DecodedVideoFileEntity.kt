@@ -6,7 +6,7 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "decoded_video_files")
+//@Table(name = "decoded_video_files") <- it superfluous because it's automatically create this name
 @JsonSerialize
 class DecodedVideoFileEntity() : AbstractEntity() {
     @Column(name = "extension")

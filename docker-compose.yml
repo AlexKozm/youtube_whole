@@ -1,19 +1,21 @@
 version: "3.9"
 services:
-  mariadb1:
+  mariadb:
     image: mariadb:10.7
-    command: --default-authentication-plugin=mysql_native_password
+#    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
     volumes:
-      - ~/apps/mariadb:/var/lib/mysql
-      - ./dev/mariadb:/docker-entrypoint-initdb.d
+      - db:/var/lib/mysql
+#      - ~/apps/mariadb:/var/lib/mysql
+#      - ./dev/mariadb:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=S3cret
       - MYSQL_PASSWORD=An0thrS3crt
       - MYSQL_USER=citizix_user
       - MYSQL_DATABASE=citizix_db
     container_name: mariadb
+    restart: on-failure
 #    healthcheck:
 #      test: [ "CMD", "mariadb-admin", "--protocol", "tcp" ,"ping" ]
 #      timeout: 3m
@@ -21,13 +23,15 @@ services:
 #      retries: 10
 
   rabbitmq:
-    image: rabbitmq:3.10.7-management
+    image: rabbitmq:3-management
     ports:
+      - "5672:5672"
       - "15672:15672"
     container_name: 'rabbitmq'
+    restart: on-failure
 
   youtube3:
-    build: youtube3/build/docker/main
+    build: youtube3/docker/main
     container_name: youtubeApi
     ports:
       - "8080:8080"
@@ -38,9 +42,23 @@ services:
       - MYSQL_PASSWORD=An0thrS3crt
       - MYSQL_USER=citizix_user
       - MYSQL_DATABASE=citizix_db
+    depends_on:
+      - mariadb
+      - rabbitmq
+      - common
+    restart: on-failure
+
+  common:
+    build: common/docker/main
+    container_name: common
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mariadb
+    restart: on-failure
 
   youtube_transcoder:
-    build: youtube_transcoder/build/docker/main
+    build: youtube_transcoder/docker/main
     container_name: youtube_transcoder
     ports:
       - "8081:8081"
@@ -51,3 +69,11 @@ services:
       - MYSQL_PASSWORD=An0thrS3crt
       - MYSQL_USER=citizix_user
       - MYSQL_DATABASE=citizix_db
+    depends_on:
+      - mariadb
+      - rabbitmq
+      - youtube3
+      - common
+    restart: on-failure
+volumes:
+  db:

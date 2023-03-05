@@ -6,7 +6,7 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "original_video_files")
+//@Table(name = "original_video_files") <- the same with last one
 @JsonSerialize
 class OriginalVideoFileEntity() : AbstractEntity(){
     @Column(name = "file_names")
